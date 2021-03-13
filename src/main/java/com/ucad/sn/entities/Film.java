@@ -1,5 +1,6 @@
 package com.ucad.sn.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Film implements Serializable {
      private  double duree;
      private  String photo;
      @OneToMany(mappedBy = "film")
+     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //Pour ne pas tomber dans un boucle infinie
      private Collection <Projection> projections;
      @ManyToOne
      private  Categorie categorie;

@@ -11,5 +11,4 @@ public interface ICinemaService {
     public  void  initProjections();
     public  void  initTickets();
 
-
 }

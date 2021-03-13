@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -36,6 +37,7 @@ public class CinemaInitServiceImpl implements  ICinemaService {
     public  FilmRepository filmRepository;
     @Autowired
     public  CategorieRepository categorieRepository;
+    int a=1;
 
     @Override
     public void initVilles() {
@@ -119,7 +121,7 @@ public class CinemaInitServiceImpl implements  ICinemaService {
         double[] durees= new  double[] {1,2,1.5,3,4,2,1,5,2};
         List<Categorie> categories = categorieRepository.findAll();
         Random random = new Random();
-        Stream.of("12 Hommes en colaire","Forest Gump","Green Book","La ligne Verte","Le Parrain","Le Seigneur es anneaux").forEach(titre->{
+        Stream.of("12 Hommes en colere","Forrest Gump","Green Book","La Ligne verte","Le Parrain","Le Seigneur des anneaux").forEach(titre->{
                Film film=new Film();
                 film.setTitre(titre);
 
@@ -135,7 +137,7 @@ public class CinemaInitServiceImpl implements  ICinemaService {
 
     @Override
     public void initProjections() {
-        double[] prix= new  double[]{2000,1500,3000,1000,15000};
+        double[] prix= new  double[]{2000,1500,3000,1000,4000};
         villeRepository.findAll().forEach(ville -> {
             ville.getCinemas().forEach(cinema -> {
                 cinema.getSalles().forEach(salle -> {
@@ -157,16 +159,26 @@ public class CinemaInitServiceImpl implements  ICinemaService {
 
     @Override
     public void initTickets() {
-        projectionRepository.findAll().forEach(p->{
-            p.getSalle().getPlaces().forEach(place -> {
-                 Ticket ticket =new Ticket();
-                 ticket.setPlace(place);
-                 ticket.setReserve(false);
-                 ticket.setPrix(p.getPrix());
-                 ticket.setProjection(p);
-                 ticketRepository.save(ticket);
-            });
-        });
 
+        List<Place> places =placeRepository.findAll();
+        projectionRepository.findAll().forEach(p->{
+            if(p!=null) {
+                places.forEach(place -> {
+                    if(place!=null) {
+                        while (a<=10)
+                        {
+                        Ticket ticket = new Ticket();
+                        ticket.setPlace(place);
+                        ticket.setReserve(false);
+                        ticket.setPrix(p.getPrix());
+                        ticket.setProjection(p);
+                        ticketRepository.save(ticket);
+                        a++;
+                        }
+
+                    }
+                });
+            }
+        });
     }
 }
