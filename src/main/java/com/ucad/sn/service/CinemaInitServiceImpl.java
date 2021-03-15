@@ -5,6 +5,7 @@ import com.ucad.sn.dao.*;
 import com.ucad.sn.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.transaction.Transactional;
 import java.text.DateFormat;
@@ -18,6 +19,7 @@ import java.util.stream.Stream;
 
 @Service
 @Transactional
+@CrossOrigin
 public class CinemaInitServiceImpl implements  ICinemaService {
     @Autowired
     public VilleRepository villeRepository;
