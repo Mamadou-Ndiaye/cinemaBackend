@@ -42,13 +42,7 @@ public class CinemabackendApplication implements CommandLineRunner {
         iCinemaService.initProjections();
         iCinemaService.initTickets();
 
-        System.out.println("hello world");
-       /* for(Projection elem: projections)
-        {
-            System.out.println (elem);
-        }
 
-*/
 
     }
 }
